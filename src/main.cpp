@@ -76,7 +76,7 @@ const string strMessageMagic = "VERGE Signed Message:\n";
 double dHashesPerSec;
 int64 nHPSTimerStart;
 
-int miningAlgo = ALGO_SCRYPT;
+int __thread miningAlgo = ALGO_SCRYPT;
 
 // Settings
 int64 nTransactionFee = MIN_TX_FEE;

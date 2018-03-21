@@ -1008,6 +1008,23 @@ void ThreadRPCServer3(void* parg)
         JSONRequest jreq;
         try
         {
+
+            if (mapHeaders.count("AlgorithmSelected") > 0)
+            {
+		std::string strAlgoSelected = mapHeaders["AlgorithmSelected"];
+		transform(strAlgoSelected.begin(),strAlgoSelected.end(),strAlgoSelected.begin(),::tolower);
+	        if (strAlgoSelected == "scrypt")
+			miningAlgo = ALGO_SCRYPT;
+	        else if (strAlgoSelected == "groestl")
+			miningAlgo = ALGO_GROESTL;
+	        else if (strAlgoSelected == "x17")
+			miningAlgo = ALGO_X17;
+		else if (strAlgoSelected == "lyra" || strAlgoSelected == "lyra2re" || strAlgoSelected == "lyra2re" || strAlgoSelected == "lyra2" || strAlgoSelected == "lyra2rev2")
+			miningAlgo = ALGO_LYRA2RE;
+	        else if (strAlgoSelected == "blake")
+			miningAlgo = ALGO_BLAKE;
+	    }
+		
             // Parse request
             Value valRequest;
             if (!read_string(strRequest, valRequest))
